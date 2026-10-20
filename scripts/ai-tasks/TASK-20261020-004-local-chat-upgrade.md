@@ -1,0 +1,9 @@
+# TASK-20261020-004 — Local conversation upgrade integration
+
+Codex/root;2026-10-20; rules2026-10-15.1. Recipient root AI_TASKS.md/TODO.md is authoritative. User authorized only the Drone-Ranger-RL-agent chat upgrade; maintainer code and remote branches are read-only. Current recipient release HEADd9da7c4; source main86eca656 / publicrelease8becd741. Detached candidate .worktrees/chat-upgrade; three services have independent commits before shared contract documentation.
+
+Whitelist:39 service source/test/document paths plus contracts/runtime-api.md and docs/api-interfaces.html. Do not copy upstream historical task handoffs or candidate root task snapshots. Current task handoffs are recipient-specific. Existing App.tsx/main.tsx/global styles, kernel, configuration, credentials, real conversations, business files and Git refs/remotes are preserved. Existing browser tab held an old application's DOM; a fresh5173tab and runtime applicationRoot confirmed the actual current installation.
+
+101 automated tests and TypeScript/Vite build pass. Synthetic-model browser verifies real services send/stream, title changes, session switching, token occupancy/reload, GFM and formulas. No inference against the customer's account, no modification of real conversations, no claim of human/native Windows acceptance. Optional fsevents install notice and build chunk-size warning remain. Independent audit confirmed41exact source paths and28original backups;13source additions.
+
+Deployment uses saved source hashes to reject concurrent edits, installs local locked dependencies, checks idle runtime and performs complete owned Restart app. Root records final deployment/readiness and source-preservation proof in the recipient indexes. Source backup/cache/test outputs remain ignored in the recipient folder. No remote push, main/release merge, kernel baseline regeneration or automatic rollback.

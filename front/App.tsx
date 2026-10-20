@@ -1,4 +1,5 @@
 import { useEffect, useRef, useState } from 'react';
+import { DroneRangerDashboard } from './features/drone-ranger/DroneRangerDashboard';
 
 // This application-owned host is optional. Core controls also have a direct URL.
 export function App() {
@@ -20,6 +21,7 @@ export function App() {
     return () => window.removeEventListener('message', listener);
   }, []);
   return <>
+    <DroneRangerDashboard />
     <iframe ref={controls} title="Kernel controls" src="/__saplingagent/kernel" style={{ position: 'fixed', top: 12, right: 16, width: open ? 'min(660px, calc(100vw - 32px))' : '320px', height: open ? 'min(760px, calc(100dvh - 32px))' : '50px', zIndex: 40, border: open ? '1px solid #dce3d7' : 0, borderRadius: 14, boxShadow: open ? '0 12px 60px #26312820' : 'none' }} />
     <iframe title="Saplingagent version" src="/__saplingagent/kernel?footer" style={{ position: 'fixed', left: '50%', transform: 'translateX(-50%)', bottom: 4, width: 310, height: 25, border: 0, zIndex: 10, pointerEvents: 'none' }} />
   </>;
