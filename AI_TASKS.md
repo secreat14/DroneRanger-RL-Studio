@@ -207,7 +207,9 @@ agent-runtime maintains this section serially. Modification tools attempt to reg
 | RUN-787b9f69-5b95-47b4-8c4b-262ecf89267a | interrupted | 2026-10-20T09:15:09.989Z | [Record](backend/agent-runtime/ai-tasks/runtime/RUN-787b9f69-5b95-47b4-8c4b-262ecf89267a.md) |
 | RUN-7255c804-5a4d-41c4-adfd-d040796a0bd9 | completed | 2026-10-20T09:16:25.355Z | [Record](backend/agent-runtime/ai-tasks/runtime/RUN-7255c804-5a4d-41c4-adfd-d040796a0bd9.md) |
 | RUN-ad642d12-5351-4fad-bdc9-2d6a30b37223 | completed | 2026-10-20T09:19:10.168Z | [Record](backend/agent-runtime/ai-tasks/runtime/RUN-ad642d12-5351-4fad-bdc9-2d6a30b37223.md) |
-| RUN-5868d02b-e6a8-44e0-a639-0fc2aca95b0d | inProgress | 2026-10-20T09:34:55.003Z | [Record](backend/agent-runtime/ai-tasks/runtime/RUN-5868d02b-e6a8-44e0-a639-0fc2aca95b0d.md) |
+| RUN-5868d02b-e6a8-44e0-a639-0fc2aca95b0d | completed | 2026-10-20T09:39:17.460Z | [Record](backend/agent-runtime/ai-tasks/runtime/RUN-5868d02b-e6a8-44e0-a639-0fc2aca95b0d.md) |
+| RUN-89ce3c95-7f5f-4b22-a160-a4708527a97e | completed | 2026-10-20T18:39:56.526Z | [Record](backend/agent-runtime/ai-tasks/runtime/RUN-89ce3c95-7f5f-4b22-a160-a4708527a97e.md) |
+| RUN-367a8c5a-1c78-4b85-b44d-4968b6c7c860 | inProgress | 2026-10-20T21:41:26.968Z | [Record](backend/agent-runtime/ai-tasks/runtime/RUN-367a8c5a-1c78-4b85-b44d-4968b6c7c860.md) |
 
 <!-- seedagent-runtime-tasks:end -->
 
@@ -280,3 +282,11 @@ Codex/root, 2026-10-20, rules2026-10-15.1. User explicitly requested removing th
 ## RUN-ad642d12-5351-4fad-bdc9-2d6a30b37223 — Remove run introduction
 
 Codex/root, 2026-10-20, rules2026-10-15.1. User explicitly requested deleting the Run page introduction block. Removed the eyebrow, heading and descriptive paragraph from `RunWorkspace`; the model dropdown, status, one-shot run button, visualization, decision telemetry/history and mission inputs remain unchanged. Scope is the Drone Ranger component and root task records; no CSS, backend, API, dependency or model-data change. TypeScript/Vite production build and `git diff --check` passed; fresh rendered DOM and page image confirmed the run control card is now the first child of the workspace and the removed copy is absent. No commit, branch synchronization or publication.
+
+## RUN-89ce3c95-7f5f-4b22-a160-a4708527a97e — Expanded training configuration
+
+Codex/root, 2026-10-20, rules2026-10-15.1. User requested more Training-page parameters, including timestep controls. Added bilingual grouped settings for environment/workload, optimization/rollout and evaluation/checkpoints: total timesteps, per-episode limit, parallel environments, rollout length, learning rate, batch size, discount factor, maximum gradient norm, evaluation interval/episodes, checkpoint interval, seed and device. The linked summary now derives rollout-buffer size and displays optimization, evaluation and checkpoint plans. Scope is Drone Ranger source/styles/docs plus root task records; no backend/API/dependency/model file change. TypeScript/Vite production build and `git diff --check` passed. Fresh rendered DOM confirmed the updated bundle and Training navigation, but the browser remained on Run and page-image capture was unavailable, so direct Training-page visual acceptance remains pending. No commit or push was requested; the prior GitHub permission blocker remains unchanged.
+
+## RUN-367a8c5a-1c78-4b85-b44d-4968b6c7c860 — Publish DroneRanger RL Studio
+
+Codex/root, 2026-10-20, rules2026-10-15.1. User explicitly authorized publishing the current project to `https://github.com/secreat14/DroneRanger-RL-Studio.git`. Publication scope is the current project source plus pending Drone Ranger training-configuration and task-document changes; ignored credentials, conversations, logs, caches, installed dependencies and build output remain excluded. Pre-publication review found no real credential or oversized tracked file; the only token-pattern match was an explicit test fixture. Frontend production build, all 54 frontend tests and `git diff --check` passed, with only the existing Vite large-chunk warning. The target repository was reachable and appeared empty. Final commit and remote push results are reported in the completion receipt; no human UI acceptance is inferred.

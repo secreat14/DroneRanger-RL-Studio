@@ -144,18 +144,18 @@ const workspaceCopy = {
   en: {
     navigation: 'Workspace pages', run: 'Run', runHint: 'Execute one preview', training: 'Training', trainingHint: 'Configure a new run', models: 'Models', modelsHint: 'Edit policy profiles',
     runStatus: 'Execution engine', runState: 'Frontend preview', trainingStatus: 'Training service', trainingState: 'Configuration only', modelStatus: 'Model changes', modelState: 'Local draft',
-    trainingTitle: 'Training configuration', trainingLead: 'Prepare a reproducible run before connecting it to the training service.', runSetup: 'Run setup', policyModel: 'Policy model', environment: 'Environment', timesteps: 'Total timesteps', parallelEnvs: 'Parallel environments', seed: 'Random seed', device: 'Compute device',
+    trainingTitle: 'Training configuration', trainingLead: 'Prepare a reproducible run before connecting it to the training service.', runSetup: 'Run setup', basicSettings: 'Environment & workload', optimizationSettings: 'Optimization & rollout', evaluationSettings: 'Evaluation & checkpoints', policyModel: 'Policy model', environment: 'Environment', timesteps: 'Total timesteps', maxEpisodeSteps: 'Maximum episode steps', parallelEnvs: 'Parallel environments', rolloutSteps: 'Rollout steps per environment', discountFactor: 'Discount factor γ', maxGradNorm: 'Maximum gradient norm', evaluationInterval: 'Evaluation interval', evaluationEpisodes: 'Evaluation episodes', checkpointInterval: 'Checkpoint interval', seed: 'Random seed', device: 'Compute device',
     saveConfig: 'Save local configuration', savedConfig: 'Configuration saved locally', backendNote: 'Training is not started from this preview. Connect the training service before enabling run controls.',
-    runSummary: 'Run summary', estimated: 'Planned workload', rollout: 'Rollout mode', reproducible: 'Reproducible seed', localOnly: 'Local configuration',
+    runSummary: 'Run summary', estimated: 'Planned workload', episodeLimit: 'Episode limit', rollout: 'Rollout buffer', optimization: 'Optimization', evaluation: 'Evaluation schedule', checkpoint: 'Checkpoint schedule', reproducible: 'Reproducible seed', localOnly: 'Local configuration', stepsUnit: 'steps', episodesUnit: 'episodes', everySteps: 'every',
     editorTitle: 'Model editor', editorLead: 'Adjust policy metadata and core parameters without changing the original model files.', modelLibrary: 'Model library', profile: 'Profile', displayName: 'Display name', description: 'Description', learningRate: 'Learning rate', discount: 'Discount factor γ', batchSize: 'Batch size', saveDraft: 'Save local draft', savedDraft: 'Draft saved locally', editorNote: 'Edits remain in this browser session and do not overwrite checkpoints or source configuration.',
     architecture: 'Model architecture', architectureHint: 'Reference network layout', reference: 'REFERENCE', input: 'Input', backbone: 'Backbone', heads: 'Output heads', activation: 'Activation', parameterScale: 'Parameter scale', architectureNote: 'Architecture is a UI reference profile and is not read from a loaded checkpoint.',
   },
   zh: {
     navigation: '工作区页面', run: '运行', runHint: '执行一次预览', training: '训练', trainingHint: '配置新的训练任务', models: '模型', modelsHint: '编辑策略配置',
     runStatus: '运行引擎', runState: '前端预览', trainingStatus: '训练服务', trainingState: '仅配置', modelStatus: '模型修改', modelState: '本地草稿',
-    trainingTitle: '训练配置', trainingLead: '在接入训练服务前，先准备可复现的训练任务配置。', runSetup: '任务设置', policyModel: '策略模型', environment: '训练环境', timesteps: '总训练步数', parallelEnvs: '并行环境数', seed: '随机种子', device: '计算设备',
+    trainingTitle: '训练配置', trainingLead: '在接入训练服务前，先准备可复现的训练任务配置。', runSetup: '任务设置', basicSettings: '环境与训练规模', optimizationSettings: '优化与采样', evaluationSettings: '评估与检查点', policyModel: '策略模型', environment: '训练环境', timesteps: '总训练时间步', maxEpisodeSteps: '单回合最大时间步', parallelEnvs: '并行环境数', rolloutSteps: '每环境采样步数', discountFactor: '折扣因子 γ', maxGradNorm: '最大梯度范数', evaluationInterval: '评估间隔', evaluationEpisodes: '评估回合数', checkpointInterval: '检查点保存间隔', seed: '随机种子', device: '计算设备',
     saveConfig: '保存本地配置', savedConfig: '配置已保存到当前页面', backendNote: '此预览页面不会启动真实训练；接入训练服务后再启用运行控制。',
-    runSummary: '任务摘要', estimated: '计划工作量', rollout: '采样方式', reproducible: '可复现种子', localOnly: '本地配置',
+    runSummary: '任务摘要', estimated: '计划训练量', episodeLimit: '单回合上限', rollout: '采样缓冲区', optimization: '优化参数', evaluation: '评估计划', checkpoint: '检查点计划', reproducible: '可复现种子', localOnly: '本地配置', stepsUnit: '步', episodesUnit: '回合', everySteps: '每',
     editorTitle: '模型编辑', editorLead: '调整策略说明与核心参数，不直接改写原始模型文件。', modelLibrary: '模型列表', profile: '模型配置', displayName: '显示名称', description: '模型说明', learningRate: '学习率', discount: '折扣因子 γ', batchSize: '批次大小', saveDraft: '保存本地草稿', savedDraft: '草稿已保存到当前页面', editorNote: '修改仅保留在当前浏览器会话，不会覆盖检查点或源码配置。',
     architecture: '模型架构', architectureHint: '参考网络结构', reference: '参考结构', input: '输入', backbone: '主干网络', heads: '输出分支', activation: '激活函数', parameterScale: '参数规模', architectureNote: '此架构为界面参考配置，并非从已加载的模型检查点中读取。',
   },
@@ -499,7 +499,10 @@ function RunWorkspace({ locale, model, modelId, onModelChange, progress, running
 function TrainingWorkspace({ locale, modelId, onModelChange }: { locale: Locale; modelId: ModelId; onModelChange: (id: ModelId) => void }) {
   const text = workspaceCopy[locale];
   const [saved, setSaved] = useState(false);
-  const [configuration, setConfiguration] = useState({ environment: 'DroneRanger-Urban-v1', timesteps: '2000000', parallel: '8', seed: '24', device: 'Auto' });
+  const [configuration, setConfiguration] = useState({
+    environment: 'DroneRanger-Urban-v1', timesteps: '2000000', maxEpisodeSteps: '1000', parallel: '8', rolloutSteps: '2048',
+    learningRate: '0.0003', batchSize: '64', discountFactor: '0.99', maxGradNorm: '0.5', evaluationInterval: '50000', evaluationEpisodes: '10', checkpointInterval: '100000', seed: '24', device: 'Auto',
+  });
   const update = (key: keyof typeof configuration, value: string) => {
     setConfiguration(current => ({ ...current, [key]: value }));
     setSaved(false);
@@ -511,10 +514,22 @@ function TrainingWorkspace({ locale, modelId, onModelChange }: { locale: Locale;
       <form className="workspace-form" onSubmit={event => { event.preventDefault(); setSaved(true); }}>
         <h2>{text.runSetup}</h2>
         <div className="form-grid">
+          <h3 className="form-section-title">{text.basicSettings}</h3>
           <label><span>{text.policyModel}</span><select value={modelId} onChange={event => onModelChange(event.target.value as ModelId)}>{models.map(item => <option key={item.id} value={item.id}>{item.name} · {locale === 'zh' ? modelChinese[item.id].family : item.family}</option>)}</select></label>
           <label><span>{text.environment}</span><select value={configuration.environment} onChange={event => update('environment', event.target.value)}><option>DroneRanger-Urban-v1</option><option>DroneRanger-OpenField-v1</option><option>DroneRanger-Obstacle-v2</option></select></label>
           <label><span>{text.timesteps}</span><input type="number" min="1000" step="1000" value={configuration.timesteps} onChange={event => update('timesteps', event.target.value)} /></label>
+          <label><span>{text.maxEpisodeSteps}</span><input type="number" min="10" step="10" value={configuration.maxEpisodeSteps} onChange={event => update('maxEpisodeSteps', event.target.value)} /></label>
           <label><span>{text.parallelEnvs}</span><input type="number" min="1" max="64" value={configuration.parallel} onChange={event => update('parallel', event.target.value)} /></label>
+          <label><span>{text.rolloutSteps}</span><input type="number" min="1" step="1" value={configuration.rolloutSteps} onChange={event => update('rolloutSteps', event.target.value)} /></label>
+          <h3 className="form-section-title">{text.optimizationSettings}</h3>
+          <label><span>{text.learningRate}</span><input type="number" min="0.000001" max="1" step="0.000001" value={configuration.learningRate} onChange={event => update('learningRate', event.target.value)} /></label>
+          <label><span>{text.batchSize}</span><input type="number" min="1" step="1" value={configuration.batchSize} onChange={event => update('batchSize', event.target.value)} /></label>
+          <label><span>{text.discountFactor}</span><input type="number" min="0" max="1" step="0.001" value={configuration.discountFactor} onChange={event => update('discountFactor', event.target.value)} /></label>
+          <label><span>{text.maxGradNorm}</span><input type="number" min="0" step="0.1" value={configuration.maxGradNorm} onChange={event => update('maxGradNorm', event.target.value)} /></label>
+          <h3 className="form-section-title">{text.evaluationSettings}</h3>
+          <label><span>{text.evaluationInterval}</span><input type="number" min="1000" step="1000" value={configuration.evaluationInterval} onChange={event => update('evaluationInterval', event.target.value)} /></label>
+          <label><span>{text.evaluationEpisodes}</span><input type="number" min="1" step="1" value={configuration.evaluationEpisodes} onChange={event => update('evaluationEpisodes', event.target.value)} /></label>
+          <label><span>{text.checkpointInterval}</span><input type="number" min="1000" step="1000" value={configuration.checkpointInterval} onChange={event => update('checkpointInterval', event.target.value)} /></label>
           <label><span>{text.seed}</span><input type="number" value={configuration.seed} onChange={event => update('seed', event.target.value)} /></label>
           <label><span>{text.device}</span><select value={configuration.device} onChange={event => update('device', event.target.value)}><option>Auto</option><option>CPU</option><option>CUDA</option><option>MPS</option></select></label>
         </div>
@@ -522,7 +537,7 @@ function TrainingWorkspace({ locale, modelId, onModelChange }: { locale: Locale;
       </form>
       <aside className="run-summary">
         <div className="summary-heading"><span className="model-monogram" style={{ background: models.find(item => item.id === modelId)?.softColor, color: models.find(item => item.id === modelId)?.color }}>{modelId.slice(0, 1).toUpperCase()}</span><div><small>{text.runSummary}</small><h2>{modelId.toUpperCase()}</h2></div></div>
-        <dl><div><dt>{text.environment}</dt><dd>{configuration.environment}</dd></div><div><dt>{text.estimated}</dt><dd>{Number(configuration.timesteps || 0).toLocaleString(locale === 'zh' ? 'zh-CN' : 'en-US')} steps</dd></div><div><dt>{text.rollout}</dt><dd>{configuration.parallel} × env</dd></div><div><dt>{text.reproducible}</dt><dd>#{configuration.seed}</dd></div></dl>
+        <dl><div><dt>{text.environment}</dt><dd>{configuration.environment}</dd></div><div><dt>{text.estimated}</dt><dd>{Number(configuration.timesteps || 0).toLocaleString(locale === 'zh' ? 'zh-CN' : 'en-US')} {text.stepsUnit}</dd></div><div><dt>{text.episodeLimit}</dt><dd>{Number(configuration.maxEpisodeSteps || 0).toLocaleString(locale === 'zh' ? 'zh-CN' : 'en-US')} {text.stepsUnit}</dd></div><div><dt>{text.rollout}</dt><dd>{configuration.parallel} × {configuration.rolloutSteps} = {(Number(configuration.parallel) * Number(configuration.rolloutSteps)).toLocaleString(locale === 'zh' ? 'zh-CN' : 'en-US')}</dd></div><div><dt>{text.optimization}</dt><dd>LR {configuration.learningRate} · batch {configuration.batchSize} · γ {configuration.discountFactor}</dd></div><div><dt>{text.evaluation}</dt><dd>{text.everySteps} {Number(configuration.evaluationInterval || 0).toLocaleString(locale === 'zh' ? 'zh-CN' : 'en-US')} {text.stepsUnit} · {configuration.evaluationEpisodes} {text.episodesUnit}</dd></div><div><dt>{text.checkpoint}</dt><dd>{text.everySteps} {Number(configuration.checkpointInterval || 0).toLocaleString(locale === 'zh' ? 'zh-CN' : 'en-US')} {text.stepsUnit}</dd></div><div><dt>{text.reproducible}</dt><dd>#{configuration.seed} · {configuration.device}</dd></div></dl>
         <span className="local-badge">{text.localOnly}</span>
       </aside>
     </div>

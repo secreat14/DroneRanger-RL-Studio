@@ -143,6 +143,8 @@
 .form-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 15px; }
 .form-grid label { min-width: 0; display: flex; flex-direction: column; gap: 7px; }
 .form-grid label > span { color: #75827c; font-size: 9px; font-weight: 650; }
+.form-section-title { grid-column: 1 / -1; margin: 5px 0 -2px; border-bottom: 1px solid #e2e8e3; padding: 0 0 8px; color: #5f766c; font-size: 9px; font-weight: 750; letter-spacing: .08em; text-transform: uppercase; }
+.form-section-title:first-child { margin-top: 0; }
 .form-grid input, .form-grid select, .form-grid textarea { box-sizing: border-box; width: 100%; border: 1px solid #d8e0da; border-radius: 10px; padding: 10px 11px; outline: none; background: #f8faf7; color: #2d4038; font: 500 11px/1.4 inherit; }
 .form-grid textarea { resize: vertical; }
 .form-grid input:focus, .form-grid select:focus, .form-grid textarea:focus { border-color: #6eb18f; box-shadow: 0 0 0 3px rgba(110,177,143,.12); }
@@ -282,6 +284,7 @@
   .workspace-page-heading > svg { display: none; }
   .workspace-page-heading h1 { font-size: 26px; }
   .form-grid { grid-template-columns: 1fr; }
+  .form-section-title { grid-column: auto; }
   .wide-field { grid-column: auto; }
   .form-actions { align-items: flex-start; flex-direction: column; }
   .form-title { align-items: flex-start; flex-wrap: wrap; gap: 10px; }
