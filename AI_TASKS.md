@@ -209,7 +209,11 @@ agent-runtime maintains this section serially. Modification tools attempt to reg
 | RUN-ad642d12-5351-4fad-bdc9-2d6a30b37223 | completed | 2026-10-20T09:19:10.168Z | [Record](backend/agent-runtime/ai-tasks/runtime/RUN-ad642d12-5351-4fad-bdc9-2d6a30b37223.md) |
 | RUN-5868d02b-e6a8-44e0-a639-0fc2aca95b0d | completed | 2026-10-20T09:39:17.460Z | [Record](backend/agent-runtime/ai-tasks/runtime/RUN-5868d02b-e6a8-44e0-a639-0fc2aca95b0d.md) |
 | RUN-89ce3c95-7f5f-4b22-a160-a4708527a97e | completed | 2026-10-20T18:39:56.526Z | [Record](backend/agent-runtime/ai-tasks/runtime/RUN-89ce3c95-7f5f-4b22-a160-a4708527a97e.md) |
-| RUN-367a8c5a-1c78-4b85-b44d-4968b6c7c860 | inProgress | 2026-10-20T21:41:26.968Z | [Record](backend/agent-runtime/ai-tasks/runtime/RUN-367a8c5a-1c78-4b85-b44d-4968b6c7c860.md) |
+| RUN-367a8c5a-1c78-4b85-b44d-4968b6c7c860 | completed | 2026-10-20T21:44:14.316Z | [Record](backend/agent-runtime/ai-tasks/runtime/RUN-367a8c5a-1c78-4b85-b44d-4968b6c7c860.md) |
+| RUN-81119d11-92fe-4ae9-8b15-3d28c281049f | completed | 2026-10-21T17:10:45.936Z | [Record](backend/agent-runtime/ai-tasks/runtime/RUN-81119d11-92fe-4ae9-8b15-3d28c281049f.md) |
+| RUN-55f49c98-e822-43d4-bd35-31158e1da766 | completed | 2026-10-21T17:35:54.608Z | [Record](backend/agent-runtime/ai-tasks/runtime/RUN-55f49c98-e822-43d4-bd35-31158e1da766.md) |
+| RUN-d90fcdc4-2438-4004-af67-7efd1450e190 | completed | 2026-10-21T22:37:21.373Z | [Record](backend/agent-runtime/ai-tasks/runtime/RUN-d90fcdc4-2438-4004-af67-7efd1450e190.md) |
+| RUN-947af1b8-30ca-458d-8198-9ace4e791f47 | inProgress | 2026-10-21T22:44:18.693Z | [Record](backend/agent-runtime/ai-tasks/runtime/RUN-947af1b8-30ca-458d-8198-9ace4e791f47.md) |
 
 <!-- seedagent-runtime-tasks:end -->
 
@@ -290,3 +294,15 @@ Codex/root, 2026-10-20, rules2026-10-15.1. User requested more Training-page par
 ## RUN-367a8c5a-1c78-4b85-b44d-4968b6c7c860 — Publish DroneRanger RL Studio
 
 Codex/root, 2026-10-20, rules2026-10-15.1. User explicitly authorized publishing the current project to `https://github.com/secreat14/DroneRanger-RL-Studio.git`. Publication scope is the current project source plus pending Drone Ranger training-configuration and task-document changes; ignored credentials, conversations, logs, caches, installed dependencies and build output remain excluded. Pre-publication review found no real credential or oversized tracked file; the only token-pattern match was an explicit test fixture. Frontend production build, all 54 frontend tests and `git diff --check` passed, with only the existing Vite large-chunk warning. The target repository was reachable and appeared empty. Final commit and remote push results are reported in the completion receipt; no human UI acceptance is inferred.
+
+## RUN-55f49c98-e822-43d4-bd35-31158e1da766 — Browser tab title
+
+Codex/root, 2026-10-21, rules2026-10-15.1. User requested changing the browser tab title to `无人机2d导航`. Updated only the document title in `front/index.html`, plus this task's root progress records. Preserved unrelated existing modifications in `front/main.tsx`, `front/chat/chat.css`, `front/README.md` and runtime task records. The TypeScript/Vite production build and `git diff --check` passed; fresh `page_read` DOM reported the exact requested title and its page image showed the application remained rendered. No backend/API/dependency change, commit, push or human acceptance.
+
+## RUN-d90fcdc4-2438-4004-af67-7efd1450e190 — Drone Ranger project README
+
+Codex/root, 2026-10-21, rules2026-10-15.1. User requested adapting the current root README to the actual project. Replaced the generic Saplingagent product/showcase and upstream-release instructions with an English Drone Ranger RL Studio guide covering current UI capabilities, explicit preview-only limitations, installation, frontend development, usage, checks, structure, technology, local documentation and licensing. Scope is `README.md` plus this task's root progress/runtime records; no frontend/backend/kernel/API/dependency/configuration/credential/conversation change. Verified every newly linked local path and ran `git diff --check`; no application build or page inspection was needed for a documentation-only change. Branch `xty-rl2d-visual-training`; no commit, push, publication or human acceptance.
+
+## RUN-947af1b8-30ca-458d-8198-9ace4e791f47 — README screenshot and Studio publication
+
+Codex/root, 2026-10-21, rules2026-10-15.1. User requested adding a current project-page image to the improved README and uploading the result. Added `assets/screenshots/drone-ranger-dashboard.png` plus its provenance/checksum record and README presentation. Fresh `page_read` verified title `无人机2d导航`, current Run/Training/Models layout, DQN preview and integrated chat; its Canvas-aware image renderer reported unavailable, so the screenshot was captured from the same loopback page with a clean headless browser profile, then visually inspected. Scope includes the reviewed current Drone Ranger header/title changes and completed task records already in the worktree, because these constitute the page being documented and uploaded. Excludes kernel, dependencies, provider configuration, credentials, conversations, ignored runtime data and Saplingagent `origin`. The user explicitly authorized pushing to `studio`; checks, commit SHA and remote result are reported in the completion receipt without claiming human acceptance.

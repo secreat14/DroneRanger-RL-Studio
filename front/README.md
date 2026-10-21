@@ -2,6 +2,8 @@
 
 The starting page provides a right-side conversation panel, independent application content and kernel operation controls. It uses React19.3.0 and assistant-ui0.15.26 with the public Agent HTTP/SSE API. No business dashboards are preloaded.
 
+The page header labels this recipient application as `Saplingagent 2D`.
+
 This recipient application adds a Drone Ranger 2D dashboard in `features/drone-ranger/`: switch among DQN, PPO, SAC and A2C policy previews, compare their routes, and inspect the selected profile's parameters below the mission view. Current mission/model values are preview data until a real training or telemetry source is connected.
 
 The dashboard can switch all visible dashboard/Canvas labels between English and Simplified Chinese. Expanded AI chat is a fixed right overlay and does not resize the mission workspace.

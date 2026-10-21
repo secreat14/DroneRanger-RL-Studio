@@ -9,6 +9,13 @@
 Save pictures, upload attachments and downloaded reference materials here; record the URL, acquisition date and applicable functions for each external resource. Public distribution only includes materials with distribution rights, and personal attachments are within the scope of application backup.
 Runtime temporary resources belong to the cache directory in the project, and customer data cannot be written to the public directory of the development machine.
 
+## Drone Ranger RL Studio screenshot
+
+- `screenshots/drone-ranger-dashboard.png`: 1512×900 PNG captured from the running local project page on 2026-10-21 for `RUN-947af1b8-30ca-458d-8198-9ace4e791f47` and displayed in the root README.
+- The screenshot shows the current English Run workspace with the DQN frontend-preview route, obstacle map, decision panel, Run/Training/Models navigation and collapsed AI chat entry.
+- Capture source: the project's own loopback page at `http://127.0.0.1:5173/`, rendered in a clean headless browser profile after fresh DOM/layout inspection. It contains no conversation text, credentials or external material.
+- SHA-256: `edfd6b9272d5207826a33a696feeeb4b124de79f22d430137e0be195ac7b8c58`.
+
 
 ## Demonstration videos
 

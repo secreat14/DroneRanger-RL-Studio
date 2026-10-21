@@ -9,6 +9,7 @@ button:focus-visible { outline: 2px solid #647954; outline-offset: 4px; }
 .page-header { height: 80px; flex-shrink: 0; display: flex; align-items: center; padding: 0 40px; }
 .wordmark { color: #425335; font-size: 21px; letter-spacing: -1px; font-weight: 650; }
 .wordmark span { color: #343931; font-weight: 400; }
+.page-description { margin-left: 9px; border-left: 1px solid #cfd8cc; padding-left: 9px; color: #7f8c7a; font-size: 11px; font-weight: 650; letter-spacing: .08em; text-transform: uppercase; }
 .conversation { display: flex; flex-direction: column; min-height: 0; flex: 1; }
 .message-viewport { flex: 1; overflow-y: auto; overscroll-behavior: contain; padding: 32px max(24px, calc((100% - 720px) / 2)); scrollbar-width: thin; }
 .conversation-empty { justify-content: center; padding-bottom: clamp(20px, 12vh, 130px); }
